@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>CSS box styling</title>
+        <title>Quiz</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" type="text/css" href="./assets/style.css"/>
@@ -9,11 +9,41 @@
     <body>
         <header>
             <h1 class="large-font">Javascript Quiz</h1>
-            <div class="small-font">Answer the questions as fast as possible. You will be penalized for every wrong answer.</div>
+            <div class="small-font">Answer the questions as fast as possible. You will lose 15 seconds on the timer for every wrong answer.</div>
             <button class="start-button">Begin Quiz</button>
         </header>
 
-        <section class="highscore">View Highscores</section>
+        <main>
+            <section>
+                <div class="Q-A">
+                    <h2 class="question"></h2>
+                    <div class="answer1" data-state="hidden"></div>
+                    <div class="answer2" data-state="hidden"></div>
+                    <div class="answer3" data-state="hidden"></div>
+                    <div class="answer4" data-state="hidden"></div>
+                </div>
+            </section>
+
+            <section>
+                <div class="highscore">
+                    <div>
+                        <div class="addhigh">
+                            <h2>Quiz Over</h2>
+                            <input class="name" type="text"/><button id="submit">Submit</button>
+                        </div>
+                    </div>
+                    <div>
+                        <ol class="highlist"></ol>
+                    </div>
+                </div>
+                <div class="timer">
+                    <div class="timer-text">
+                        <div class="timer-count">90</div>
+                        <h3>seconds remaning</h3>
+                    </div>
+                </div>
+            </section>
+        </main>
         <script src="./assets/script.js"></script>
     </body>
 </html>
