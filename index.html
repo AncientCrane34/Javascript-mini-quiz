@@ -17,10 +17,16 @@
             <section>
                 <div class="Q-A">
                     <h2 class="question"></h2>
-                    <div class="answer1" data-state="hidden"></div>
-                    <div class="answer2" data-state="hidden"></div>
-                    <div class="answer3" data-state="hidden"></div>
-                    <div class="answer4" data-state="hidden"></div>
+                    <div class="answerButtons">
+                        <button id="answer1" data-state="hidden"></button>
+                        <button id="answer2" data-state="hidden"></button>
+                        <button id="answer3" data-state="hidden"></button>
+                        <button id="answer4" data-state="hidden"></button>
+                    </div>
+                    <div>
+                        <div id="correct" class="feedback hide"></div>
+                        <div id="incorrect" class="feedback hide"></div>
+                    </div>
                 </div>
             </section>
 
@@ -28,8 +34,8 @@
                 <div class="highscore">
                     <div>
                         <div class="addhigh">
-                            <h2>Quiz Over</h2>
-                            <input class="name" type="text"/><button id="submit">Submit</button>
+                            <h2 class="quiz-over"></h2>
+                            <p class="enterinitial"></p>
                         </div>
                     </div>
                     <div>
