@@ -1,16 +1,17 @@
 var startButton = document.querySelector(".start-button");
 var timerElement = document.querySelector(".timer-count");
 var addHighscore = document.querySelector(".addhigh");
-var quizOver = document.querySelector(".quiz-over");
+var quizover = document.querySelector(".quiz-over");
 var par = document.querySelector(".enterinitial");
 var questionEl = document.querySelector(".question");
 var htmlChoices = ["#answer1", "#answer2", "#answer3", "#answer4"];
 var answerButtons = document.querySelector(".answerButtons")
 var feedback = document.querySelector(".feedback")
+var header = document.querySelector(".quizHeader")
+var highlist = document.querySelector("#highlist")
 
 var inputEl = document.createElement("input")
 var listEl = document.createElement("ol")
-// var liEl = document.createElement("li")
 var buttonEl = document.createElement("button")
 var questionindex = 0
 
@@ -18,6 +19,10 @@ var quizOver = false;
 var timer;
 var timercount= 90
 var flashTimeout;
+var highscore = {
+    initials: inputEl.value,
+    score: timercount.valueOf()
+}
 const questionOptions = [
     {
       question: "How can you get the total number of arguments passed to a function?",
@@ -57,6 +62,8 @@ function startquiz() {
     displayquestion()
     quizOver = false
     startButton.disabled = true
+    answerButtons.classList.remove("answerButtons")
+    header.setAttribute("style", "display: none")
 }
 function displayquestion(){
     var currentQuestion = questionOptions[questionindex]
@@ -104,15 +111,26 @@ function checkAnswer(answerEl){
     }
 }
 
+function storescores(){
+    localStorage.setItem("scores", JSON.stringify(highscore))
+}
+
 // enter initials and add it to highscore list in local storage
 // clear last question and answers
 function finishQuiz() {
     clearInterval(timer)
-    quizOver.textContent = "All Done"
+    quizover.textContent = "All Done"
     par.textContent = "Enter your initials."
     buttonEl.textContent = "Submit"
     par.appendChild(inputEl)
     par.appendChild(buttonEl)
+    var highscore = {
+        initials: inputEl.value,
+        score: timercount.valueOf()
+    }
+    buttonEl.addEventListener("click",function(){
+        localStorage.setItem("scores", JSON.stringify(highscore))
+    })
 }
 
 function startTimer() {
@@ -130,8 +148,11 @@ function startTimer() {
         }
     },1000)
 }
-// create failQuiz 
-
+ 
+function failQuiz(){
+    clearInterval(timer)
+    par.textContent = "You failed."
+}
 startButton.addEventListener("click",function(){
     startquiz()
 })
