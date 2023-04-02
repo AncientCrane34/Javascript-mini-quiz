@@ -9,8 +9,9 @@ var answerButtons = document.querySelector(".answerButtons")
 var feedback = document.querySelector(".feedback")
 var header = document.querySelector(".quizHeader")
 var highlist = document.querySelector("#highlist")
+var questionEl2 = document.querySelector(".Q-A")
+var initials = document.querySelector("#initials")
 
-var inputEl = document.createElement("input")
 var listEl = document.createElement("ol")
 var buttonEl = document.createElement("button")
 var questionindex = 0
@@ -19,10 +20,7 @@ var quizOver = false;
 var timer;
 var timercount= 90
 var flashTimeout;
-var highscore = {
-    initials: inputEl.value,
-    score: timercount.valueOf()
-}
+
 const questionOptions = [
     {
       question: "How can you get the total number of arguments passed to a function?",
@@ -56,7 +54,6 @@ const questionOptions = [
     
 
 
-// remove intro text
 function startquiz() {
     startTimer()
     displayquestion()
@@ -116,16 +113,16 @@ function storescores(){
 }
 
 // enter initials and add it to highscore list in local storage
-// clear last question and answers
 function finishQuiz() {
     clearInterval(timer)
+    questionEl2.setAttribute("style", "display: none")
+    addHighscore.classList.remove("addhigh")
     quizover.textContent = "All Done"
     par.textContent = "Enter your initials."
     buttonEl.textContent = "Submit"
-    par.appendChild(inputEl)
     par.appendChild(buttonEl)
     var highscore = {
-        initials: inputEl.value,
+        initial: initials.value.trim(),
         score: timercount.valueOf()
     }
     buttonEl.addEventListener("click",function(){
