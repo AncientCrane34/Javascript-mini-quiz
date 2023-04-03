@@ -2,7 +2,6 @@ var startButton = document.querySelector(".start-button");
 var timerElement = document.querySelector(".timer-count");
 var addHighscore = document.querySelector(".addhigh");
 var quizover = document.querySelector(".quiz-over");
-var par = document.querySelector(".enterinitial");
 var questionEl = document.querySelector(".question");
 var htmlChoices = ["#answer1", "#answer2", "#answer3", "#answer4"];
 var answerButtons = document.querySelector(".answerButtons")
@@ -11,9 +10,8 @@ var header = document.querySelector(".quizHeader")
 var highlist = document.querySelector("#highlist")
 var questionEl2 = document.querySelector(".Q-A")
 var initials = document.querySelector("#initials")
-
-var listEl = document.createElement("ol")
-var buttonEl = document.createElement("button")
+var submit = document.querySelector("#submit")
+var seeHigh = document.querySelector("#seeHigh")
 var questionindex = 0
 
 var quizOver = false;
@@ -108,27 +106,34 @@ function checkAnswer(answerEl){
     }
 }
 
-function storescores(){
-    localStorage.setItem("scores", JSON.stringify(highscore))
-}
 
-// enter initials and add it to highscore list in local storage
+
 function finishQuiz() {
     clearInterval(timer)
     questionEl2.setAttribute("style", "display: none")
     addHighscore.classList.remove("addhigh")
     quizover.textContent = "All Done"
-    par.textContent = "Enter your initials."
-    buttonEl.textContent = "Submit"
-    par.appendChild(buttonEl)
-    var highscore = {
-        initial: initials.value.trim(),
-        score: timercount.valueOf()
-    }
-    buttonEl.addEventListener("click",function(){
-        localStorage.setItem("scores", JSON.stringify(highscore))
-    })
 }
+
+
+function saveScore() {
+    var highscore = {
+        initial: initials.value,
+        score: timercount.valueOf()
+    };
+    localStorage.setItem("highscore", JSON.stringify(highscore))
+    var li = document.createElement("li");
+    var scoreHigh = JSON.parse(localStorage.getItem("highscore"));
+    li.textContent = [scoreHigh.score, scoreHigh.initial];
+    highlist.appendChild(li);
+}
+
+
+submit.addEventListener("click", function(event){
+    event.preventDefault();
+    saveScore();
+})
+
 
 function startTimer() {
     timer = setInterval(function() {
